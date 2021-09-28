@@ -993,9 +993,46 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == '__main__':
+    def clean_database(fname):
+        filepath = fname
+        # open file in read mode
+        with open(filepath, 'r') as read_obj:
+            # read first character
+            one_char = read_obj.read(1)
+            # if not fetched then file is empty
+            if one_char == "\0" or one_char == "\n":
+                print("empty file")
+            else:
+                print("cleaning...")
+                f = open(filepath, "r")
+                l = f.readlines()
+
+                for i in l:
+                    if(i == "\n"):
+                        l.remove("\n")
+
+                f.close()
+                f = open(filepath, "w")
+
+                for i in range(len(l)):
+                   f.write(l[i])
+
+                f.close()
+
+    def clean():
+        clean_database("db1.txt")
+        clean_database("db2.txt")
+        clean_database("db3.txt")
+        clean_database("db4.txt")
+        clean_database("db5.txt")
+        clean_database("db6.txt")
+        clean_database("db7.txt")
+        clean_database("db8.txt")
+        clean_database("db9.txt")
+        clean_database("db10.txt")
 
     app = QApplication(sys.argv)
     app.setApplicationName("Megasolid Idiom")
-
+    clean()
     window = MainWindow()
     app.exec_()
